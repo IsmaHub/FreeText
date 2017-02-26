@@ -24,7 +24,7 @@ For this example we have a ``index.html`` file in the root of the proyect. We ha
     <script src="jquery.js"></script>
     
     <!-- load free-text library -->
-    <script src='./node_modules/free-text/free-text.js'></script>
+    <script src='./node_modules/free-text/index.js'></script>
 </head>
 ```
 
