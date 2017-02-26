@@ -10,6 +10,7 @@
     "write",
     "dom"
   ],
+  "homepage": "https://github.com/IsmaHub/FreeText",
   "author": "'Ismael Jiménez Lorente",
   "license": "MIT",
   "devDependencies": {
