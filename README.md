@@ -17,6 +17,7 @@ You can get the content of the file ``index.js`` in ``./src/index.js`` or via NP
 >**Important:** This library use **jQuery**. You need have installed jQuery for can use *free-text* library.
 >
 For this example we have a ``index.html`` file in the root of the proyect. We have put inner the ``HEAD`` tag of html body the link of this library.
+
 ```html
 <head>
     <!-- load jQuery -->
@@ -26,7 +27,9 @@ For this example we have a ``index.html`` file in the root of the proyect. We ha
     <script src='./node_modules/free-text/free-text.js'></script>
 </head>
 ```
+
 Now we create a ``H1`` tag in the body with an id for find it.
+
 ```html
 <body>
     <h1 id='target'></h1>
