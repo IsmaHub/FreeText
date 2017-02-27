@@ -2,6 +2,7 @@
 A library that allows you write like the **Typed.js** library but more simplest in any element of the DOM.
 
 ## Install
+GitHub repository: https://github.com/IsmaHub/FreeText
 
 You can get the content of the file ``index.js`` in ``./src/index.js`` or via NPM.
 
