@@ -17,6 +17,7 @@ You can get the content of the file ``index.js`` in ``./src/index.js`` or via NP
 ## Getting started
 >**Important:** This library use **jQuery**. You need have installed jQuery for can use *free-text* library.
 >
+
 For this example we have a ``index.html`` file in the root of the proyect. We have put inner the ``HEAD`` tag of html body the link of this library.
 
 ```html
@@ -36,8 +37,10 @@ Now we create a ``H1`` tag in the body with an id for find it.
     <h1 id='target'></h1>
 </body>
 ```
-And now, we write the code for instantiate a ``FreeText`` object whicht will do the magic.
-Only require invoke the **autowriting** function whicht need receive a object as param. This object only require two properties:
+
+And now, we write the code for instantiate a ``FreeText`` object which will do the magic.
+Only require invoke the **autowriting** function which need receive a object as param. This object only require two properties:
+
 1. An array of strings with the words or sentences that it will write. 
 2. And a string of CSS selector type of the element (in this case ``'#target'``).
 
