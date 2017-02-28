@@ -11,6 +11,10 @@
     "dom",
     "html"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IsmaHub/FreeText.git"
+  },
   "homepage": "https://github.com/IsmaHub/FreeText",
   "author": "'Ismael Jiménez Lorente",
   "license": "MIT",
