@@ -13,7 +13,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/IsmaHub/FreeText.git"
+    "url": "git+https://github.com/IsmaHub/FreeText.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IsmaHub/FreeText/issues"
   },
   "homepage": "https://github.com/IsmaHub/FreeText",
   "author": "'Ismael Jiménez Lorente",
