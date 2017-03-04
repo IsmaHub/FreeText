@@ -7,16 +7,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Autowriting = function () {
-    function Autowriting(opt, cursorNumber) {
+    function Autowriting(opt, cursorNumber, cursor) {
         _classCallCheck(this, Autowriting);
 
         this._cursorNumber = cursorNumber;
         this.element = $(opt.element);
         this._words = opt.words || [];
-        this._cursors = [];
+        this._cursor = cursor;
         this._jndexStart = 0;
         this._indexStart = 0;
         this._keepWord = opt.keepWord || 800;
+        this._speedDelete = opt.speedDelete || 30;
+        this._speedWrite = opt.speedWrite || 100;
+        this._hideCursorToEnd = opt.hideCursorToEnd === false ? opt.hideCursorToEnd : true;
         this._stopBucle = false;
         this._isBucle = opt.bucle === false ? opt.bucle : true;
         this._init(this.element);
@@ -27,6 +30,7 @@ var Autowriting = function () {
         value: function _init(e) {
             e.start = this.start;
             e.setWords = this.setWords;
+            this._cursorSelector = $('[free-text-cursor-' + this._cursorNumber + ']');
             this._splitWords = [];
             this._words.forEach(function (word) {
                 this._splitWords.push({ name: word, letters: word.split(''), length: word.length - 1 });
@@ -54,8 +58,10 @@ var Autowriting = function () {
         value: function _removeWord(i, j) {
             var _this = this;
 
-            var cursor = $('[free-text-cursor-' + this._cursorNumber + ']');
             if (!this._isBucle && !this._splitWords[i + 1]) {
+                if (this._hideCursorToEnd) {
+                    this._cursor.hideCursor();
+                }
                 this._clearIntervals();
                 return;
             }
@@ -63,7 +69,7 @@ var Autowriting = function () {
                 _this._inRemoveInterval = true;
                 if (!_this._stopBucle) {
                     if (_this._splitWords[i].letters[j - 1]) {
-                        cursor.prev().remove();
+                        _this._cursorSelector.prev().remove();
                         j--;
                     } else {
                         clearInterval(_this._intervalRemove);
@@ -78,7 +84,7 @@ var Autowriting = function () {
                     }
                     return;
                 }
-            }, 100);
+            }, this._speedDelete);
         }
     }, {
         key: '_startBucle',
@@ -88,7 +94,6 @@ var Autowriting = function () {
             var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
             var jndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-            var cursor = $('[free-text-cursor-' + this._cursorNumber + ']');
             this._indexStart = index;
             this._jndexStart = jndex;
             this._intervalStart = setInterval(function () {
@@ -117,11 +122,11 @@ var Autowriting = function () {
                         return;
                     } else {
                         var letter = _this2._splitWords[_this2._indexStart].letters[_this2._jndexStart];
-                        $(cursor).before('<span auto-letter-' + _this2._cursorNumber + '>' + letter + '</span>');
+                        $(_this2._cursorSelector).before('<span auto-letter-' + _this2._cursorNumber + '>' + letter + '</span>');
                         _this2._jndexStart++;
                     }
                 }
-            }, 300);
+            }, this._speedWrite);
         }
     }, {
         key: 'stop',
@@ -143,13 +148,13 @@ var Autowriting = function () {
     }, {
         key: 'clear',
         value: function clear() {
-            this._clearIntervals();
+            this._clearInftervals();
             this._intervalRemove = null;
             this._intervalStart = null;
             this._inRemoveInterval = false;
             this._inStartInterval = false;
             $('[auto-letter-' + this._cursorNumber + ']').remove();
-            $('[free-text-cursor-' + this._cursorNumber + ']').remove();
+            this._cursorSelector.remove();
             return this;
         }
     }, {
@@ -186,6 +191,7 @@ var Cursor = function () {
         key: '_init',
         value: function _init() {
             this._insert();
+            this._cursor = $('[' + this._atributte + ']');
             this._addBlink();
         }
     }, {
@@ -204,7 +210,13 @@ var Cursor = function () {
     }, {
         key: '_removeBlink',
         value: function _removeBlink() {
-            clearInterval(this.blink);
+            clearInterval(this._blink);
+        }
+    }, {
+        key: 'hideCursor',
+        value: function hideCursor() {
+            this._removeBlink();
+            this._cursor.hide();
         }
     }]);
 
@@ -237,8 +249,8 @@ var FreeText = function () {
             if (opt.element == null || opt.element == undefined) {
                 throw new Error('The param "element" is required');
             }
-            new Cursor(opt.element, this._cursorCount);
-            var autowriting = new Autowriting(opt, this._cursorCount);
+            var cursor = new Cursor(opt.element, this._cursorCount);
+            var autowriting = new Autowriting(opt, this._cursorCount, cursor);
             this._cursorCount++;
             return autowriting;
         }

@@ -7,6 +7,7 @@ class Cursor{
 
     _init(){
         this._insert();
+        this._cursor = $('['+this._atributte+']');
         this._addBlink();
     }
 
@@ -22,6 +23,11 @@ class Cursor{
     }
 
     _removeBlink(){
-        clearInterval(this.blink);
+        clearInterval(this._blink);
+    }
+
+    hideCursor(){
+        this._removeBlink();
+        this._cursor.hide();
     }
 }

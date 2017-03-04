@@ -69,6 +69,9 @@ Return the autoriting object.
  * **keepWord**: *Int*. Time to stay the words, in milliseconds. Optional. Default: 800.
  * **bucle**: *Boolean*. Indicates if this autowriting is a bulcle or not. Optional. Default: true.
  * **words**: *Array*. Array of strings that contained the words or sentences that autowriting will write. Optional. Defauls: empty array.
+ * **speedDelete**: *Int*. Speed to delete the letters, in millisecons. Optional. Default: 30.
+ * **speedWrite**:  *Int*. Speed to add the letters, in millisecons. Optional. Default: 100.
+ * **hideCursorToEnd**: *Boolean*. Only has effect if param **bucle** is false. Hide the cursor when autowriting object has written the array words complete. Optional. Default: true.
 
 ### autowriting object 
 #### Methods:

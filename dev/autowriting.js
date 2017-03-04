@@ -1,12 +1,15 @@
 class Autowriting{
-    constructor(opt, cursorNumber){
+    constructor(opt, cursorNumber, cursor){
         this._cursorNumber = cursorNumber;
         this.element = $(opt.element);
         this._words = opt.words || [];
-        this._cursors = [];
+        this._cursor = cursor;
         this._jndexStart = 0;
         this._indexStart = 0;
         this._keepWord = opt.keepWord || 800;
+        this._speedDelete = opt.speedDelete || 30;
+        this._speedWrite = opt.speedWrite || 100;
+        this._hideCursorToEnd = opt.hideCursorToEnd === false? opt.hideCursorToEnd : true;
         this._stopBucle = false;
         this._isBucle = opt.bucle === false? opt.bucle : true;
         this._init(this.element);
@@ -14,6 +17,7 @@ class Autowriting{
     _init(e){
         e.start = this.start;
         e.setWords = this.setWords;
+        this._cursorSelector = $('[free-text-cursor-'+this._cursorNumber+']');
         this._splitWords = [];
         this._words.forEach(function(word) {
            this._splitWords.push({name: word, letters: word.split(''), length: word.length-1});
@@ -36,8 +40,10 @@ class Autowriting{
     }
 
     _removeWord(i,j){
-        let cursor = $('[free-text-cursor-'+this._cursorNumber+']');
         if(!this._isBucle && !this._splitWords[i+1]){
+            if(this._hideCursorToEnd){
+                this._cursor.hideCursor();
+            }
             this._clearIntervals();
             return;
         }
@@ -45,7 +51,7 @@ class Autowriting{
             this._inRemoveInterval = true;
             if(!this._stopBucle){
                 if(this._splitWords[i].letters[j-1]){
-                    cursor.prev().remove();
+                    this._cursorSelector.prev().remove();
                     j--;
                 }else{
                     clearInterval(this._intervalRemove);
@@ -60,11 +66,10 @@ class Autowriting{
                     }
                     return;
                 }
-        },100);
+        },this._speedDelete);
     }
 
     _startBucle(index = 0, jndex = 0){
-        let cursor = $('[free-text-cursor-'+this._cursorNumber+']');
         this._indexStart = index;
         this._jndexStart = jndex;
         this._intervalStart = setInterval(()=>{
@@ -87,11 +92,11 @@ class Autowriting{
                     return;
                 }else{
                     let letter = this._splitWords[this._indexStart].letters[this._jndexStart];
-                    $(cursor).before('<span auto-letter-'+this._cursorNumber+'>'+letter+'</span>');
+                    $(this._cursorSelector).before('<span auto-letter-'+this._cursorNumber+'>'+letter+'</span>');
                     this._jndexStart++;
                 }
             }
-        },300);
+        },this._speedWrite);
     }
 
     stop(){
@@ -107,13 +112,13 @@ class Autowriting{
         clearInterval(this._intervalStart);
     }
     clear(){
-        this._clearIntervals();
+        this._clearInftervals();
         this._intervalRemove = null;
         this._intervalStart = null;
         this._inRemoveInterval = false;
         this._inStartInterval = false;
         $('[auto-letter-'+this._cursorNumber+']').remove();
-        $('[free-text-cursor-'+this._cursorNumber+']').remove();
+        this._cursorSelector.remove();
         return this;
     }
 

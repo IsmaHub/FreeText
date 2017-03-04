@@ -14,8 +14,8 @@ class FreeText {
         if(opt.element == null || opt.element == undefined){
             throw new Error('The param "element" is required');
         }
-        new Cursor(opt.element, this._cursorCount);
-        let autowriting = new Autowriting(opt, this._cursorCount);
+        let cursor = new Cursor(opt.element, this._cursorCount);
+        let autowriting = new Autowriting(opt, this._cursorCount, cursor);
         this._cursorCount++;
         return autowriting;
     }
