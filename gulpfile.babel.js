@@ -7,7 +7,7 @@ gulp.task('compiler', () => {
     return gulp.src('./dev/**/*.js')
         .pipe(sourcemaps.init())
         .pipe(babel({
-            presets: ['es2015']
+            presets: ['es2015', "stage-0"]
         }))
         .pipe(concat('./index.js'))
         .pipe(sourcemaps.write('../dev/maps'))

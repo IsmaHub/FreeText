@@ -1,8 +1,11 @@
 # free-text
 A library that allows you write like the **Typed.js** library but more simplest in any element of the DOM.
 
+## Example
+[To plunker example](https://plnkr.co/edit/DKFUHRiyAGcAjnJeK8WX?p=info)
+
 ## Install
-GitHub repository: https://github.com/IsmaHub/FreeText
+[GitHub repository](https://github.com/IsmaHub/FreeText)
 
 You can get the content of the file ``index.js`` in ``./src/index.js`` or via NPM.
 

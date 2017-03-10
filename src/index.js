@@ -7,6 +7,36 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Autowriting = function () {
+
+    /**
+     * jquery element of the cursor
+     */
+
+
+    /**
+     *Indicate if is stop the effect
+     */
+
+
+    /**
+     * the time that will be written the string
+     */
+
+
+    /**
+     * the time that will be stay the string printed
+     * 
+     */
+
+
+    /**
+     * It have the strings that will be write
+     */
+
+
+    /**
+     * the index of his cursor of the DOM
+     */
     function Autowriting(opt, cursorNumber, cursor) {
         _classCallCheck(this, Autowriting);
 
@@ -14,8 +44,6 @@ var Autowriting = function () {
         this.element = $(opt.element);
         this._words = opt.words || [];
         this._cursor = cursor;
-        this._jndexStart = 0;
-        this._indexStart = 0;
         this._keepWord = opt.keepWord || 800;
         this._speedDelete = opt.speedDelete || 30;
         this._speedWrite = opt.speedWrite || 100;
@@ -25,9 +53,51 @@ var Autowriting = function () {
         this._init(this.element);
     }
 
+    /**
+     * first function invoke
+     */
+
+
+    /**
+     * array of objects that content the length, all letters and the string of each string of _words
+     */
+
+
+    /**
+     * used as indexs
+     */
+
+
+    /**
+     * indicate if the autowriting is loop or not
+     */
+
+
+    /**
+     * Indicate if the cursor is hide or not on end
+     */
+
+
+    /**
+     * the time that will be deleted the string
+     */
+
+
+    /**
+     *the cursor instance
+     */
+
+
+    /**
+     *the jquery element
+     */
+
+
     _createClass(Autowriting, [{
         key: '_init',
         value: function _init(e) {
+            this._jndexStart = 0;
+            this._indexStart = 0;
             e.start = this.start;
             e.setWords = this.setWords;
             this._cursorSelector = $('[free-text-cursor-' + this._cursorNumber + ']');
@@ -37,6 +107,11 @@ var Autowriting = function () {
             }, this);
             this._addEvents(e);
         }
+
+        /**
+         * start the autowriting effect
+         */
+
     }, {
         key: 'start',
         value: function start() {
@@ -47,12 +122,22 @@ var Autowriting = function () {
             }
             return this;
         }
+
+        /**
+         * restart the autowriting effect
+         */
+
     }, {
         key: 'continue',
         value: function _continue() {
             this._stopBucle = false;
             return this;
         }
+
+        /**
+         * delete the letters of string
+         */
+
     }, {
         key: '_removeWord',
         value: function _removeWord(i, j) {
@@ -86,6 +171,11 @@ var Autowriting = function () {
                 }
             }, this._speedDelete);
         }
+
+        /**
+         * start the bucle
+         */
+
     }, {
         key: '_startBucle',
         value: function _startBucle() {
@@ -128,23 +218,43 @@ var Autowriting = function () {
                 }
             }, this._speedWrite);
         }
+
+        /**
+         * pause the animation
+         */
+
     }, {
         key: 'stop',
         value: function stop() {
             this._stopBucle = true;
             return this;
         }
+
+        /**
+         * return true if is one interval active
+         */
+
     }, {
         key: '_inInterval',
         value: function _inInterval() {
             return this._inRemoveInterval || this._inStartInterval;
         }
+
+        /**
+         * clear all intervals
+         */
+
     }, {
         key: '_clearIntervals',
         value: function _clearIntervals() {
             clearInterval(this._intervalRemove);
             clearInterval(this._intervalStart);
         }
+
+        /**
+         * clear the elment of dom and also clear all intervals
+         */
+
     }, {
         key: 'clear',
         value: function clear() {
@@ -157,6 +267,11 @@ var Autowriting = function () {
             this._cursorSelector.remove();
             return this;
         }
+
+        /**
+         * set the _words variable
+         */
+
     }, {
         key: 'setWords',
         value: function setWords(newWords) {
@@ -165,6 +280,12 @@ var Autowriting = function () {
             }
             return this;
         }
+
+        /**
+         * TODO
+         * add events to dispacth
+         */
+
     }, {
         key: '_addEvents',
         value: function _addEvents(e) {}
@@ -179,6 +300,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Cursor = function () {
+
+    /**
+     * have the name of the attribute to identify the cursor element
+     */
     function Cursor(elemContent, cursorNumber) {
         _classCallCheck(this, Cursor);
 
@@ -187,6 +312,16 @@ var Cursor = function () {
         this._init();
     }
 
+    /**
+     * first function to invoke
+     */
+
+
+    /**
+     * jquery element of autowriting
+     */
+
+
     _createClass(Cursor, [{
         key: '_init',
         value: function _init() {
@@ -194,11 +329,21 @@ var Cursor = function () {
             this._cursor = $('[' + this._atributte + ']');
             this._addBlink();
         }
+
+        /**
+         * insert the cursor in the dom element
+         */
+
     }, {
         key: '_insert',
         value: function _insert() {
             this._elemContent.append('<span ' + this._atributte + '>|</span>');
         }
+
+        /**
+         * add the blink effect on cursor
+         */
+
     }, {
         key: '_addBlink',
         value: function _addBlink() {
@@ -207,11 +352,21 @@ var Cursor = function () {
                 e.animate({ opacity: 'toggle' }, 200);
             }, 600);
         }
+
+        /**
+         * delete the blink effect
+         */
+
     }, {
         key: '_removeBlink',
         value: function _removeBlink() {
             clearInterval(this._blink);
         }
+
+        /**
+         * hide the cursor
+         */
+
     }, {
         key: 'hideCursor',
         value: function hideCursor() {
@@ -228,6 +383,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * instance of FreeText object
+ */
 var FTX = null;
 
 var FreeText = function () {
@@ -242,6 +400,18 @@ var FreeText = function () {
         this._cursorCount = 0;
         return FTX;
     }
+
+    /**
+     * return a instance of autowriting object
+     * @param {object} opt 
+     * @returns {object}
+     */
+
+
+    /**
+     * have the total number of cursors
+     */
+
 
     _createClass(FreeText, [{
         key: "autowriting",

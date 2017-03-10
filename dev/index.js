@@ -1,5 +1,15 @@
+/**
+ * instance of FreeText object
+ */
 let FTX = null;
+
 class FreeText {
+
+    /**
+     * have the total number of cursors
+     */
+    _cursorCount
+
     constructor(){
         if(!FTX){
             FTX = this;
@@ -10,6 +20,11 @@ class FreeText {
         return FTX;
     }
     
+    /**
+     * return a instance of autowriting object
+     * @param {object} opt 
+     * @returns {object}
+     */
     autowriting(opt){
         if(opt.element == null || opt.element == undefined){
             throw new Error('The param "element" is required');
