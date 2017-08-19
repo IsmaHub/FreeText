@@ -1,5 +1,5 @@
 # free-text
-A library that allows you write like the **Typed.js** library but more simplest in any element of the DOM.
+A library that allows you write like the **Typed.js** library but more simple in any element of the DOM.
 
 ## Example
 [To plunker example](https://plnkr.co/edit/DKFUHRiyAGcAjnJeK8WX?p=info)
